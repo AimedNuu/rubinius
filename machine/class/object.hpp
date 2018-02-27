@@ -68,6 +68,10 @@ namespace rubinius {
 
   public:   /* Type information, field access, copy support &c. */
 
+    MemoryHandle* get_handle(STATE) {
+      return memory_handle(state, this);
+    }
+
     /**
      * Returns a copy of this object. This is NOT the same as Ruby
      * Kernel#dup. Code that needs Kernel#dup semantics MUST call
@@ -177,7 +181,7 @@ namespace rubinius {
 
     /** Returns true if this Object's frozen flag set, false otherwise. */
     // Rubinius.primitive+ :object_frozen_p
-    Object*   frozen_p(STATE);
+    Object*   object_frozen_p(STATE);
 
     /**
      *  Ruby #instance_variable_get.
@@ -222,13 +226,10 @@ namespace rubinius {
 
     /** Returns an Integer ID for this object. Created as needed. */
     // Rubinius.primitive+ :object_id
-    Integer*  id(STATE);
+    Integer*  object_id(STATE);
 
     /** Indicates if this object has been assigned an object id. */
-    bool has_id(STATE);
-
-    /** Reset the object id */
-    void reset_id(STATE);
+    bool object_id_p(STATE);
 
     // Rubinius.primitive+ :object_infect
     Object* infect_prim(STATE, Object* obj, Object* other) {
@@ -300,7 +301,7 @@ namespace rubinius {
      *  Returns true if this object's tainted flag is set.
      */
     // Rubinius.primitive+ :object_tainted_p
-    Object*   tainted_p(STATE);
+    Object*   object_tainted_p(STATE);
 
     /**
      *  Clears the tainted flag on this object.
@@ -346,7 +347,7 @@ namespace rubinius {
      * false. Those objects are allowed to be modified when
      * frozen.
      */
-    Object* frozen_mod_disallowed(STATE);
+    bool frozen_mod_disallowed();
 
   public:   /* TypeInfo */
 

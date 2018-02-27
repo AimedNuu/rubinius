@@ -99,6 +99,8 @@ namespace rubinius {
 
     void each_thread(STATE, std::function<void (STATE, VM*)> process);
 
+    bool valid_thread_p(STATE, unsigned int thread_id);
+
     bool yielding_p(VM* vm);
 
     void yield(STATE, VM* vm) {

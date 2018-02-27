@@ -11,6 +11,10 @@ namespace rubinius {
     const static object_type type = TupleType;
     static uintptr_t fields_offset;
 
+    enum HeaderFlags {
+      eRTuple = 1,
+    };
+
     attr_field(full_size, native_int);
 
     /* Body access */
